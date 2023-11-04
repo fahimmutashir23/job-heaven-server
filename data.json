@@ -1,0 +1,76 @@
+ [
+          {
+            "category": "Remote Job",
+            "job_title": "Software Developer",
+            "person_name": "John Smith",
+            "posting_date": "2023-11-05",
+            "deadline": "2023-11-30",
+            "salary_range": "$60,000 - $80,000",
+            "apply_number": 50
+          },
+          {
+            "category": "Remote Job",
+            "job_title": "Data Analyst",
+            "person_name": "Mary Johnson",
+            "posting_date": "2023-11-10",
+            "deadline": "2023-12-05",
+            "salary_range": "$50,000 - $70,000",
+            "apply_number": 30
+          }
+        ,
+          {
+            "category": "On Site Job",
+            "job_title": "Sales Manager",
+            "person_name": "David Lee",
+            "posting_date": "2023-11-15",
+            "deadline": "2023-12-10",
+            "salary_range": "$70,000 - $90,000",
+            "apply_number": 25
+          },
+          {
+            "category": "On Site Job",
+            "job_title": "Digital Marketing Specialist",
+            "person_name": "Linda Davis",
+            "posting_date": "2023-11-20",
+            "deadline": "2023-12-15",
+            "salary_range": "$45,000 - $65,000",
+            "apply_number": 40
+          },
+          {
+            "category": "Hybrid",
+            "job_title": "Registered Nurse",
+            "person_name": "Robert Wilson",
+            "posting_date": "2023-11-25",
+            "deadline": "2023-12-20",
+            "salary_range": "$55,000 - $75,000",
+            "apply_number": 15
+          },
+          {
+            "category": "Hybrid",
+            "job_title": "Medical Doctor",
+            "person_name": "Jennifer White",
+            "posting_date": "2023-11-30",
+            "deadline": "2023-12-25",
+            "salary_range": "$100,000 - $120,000",
+            "apply_number": 10
+          },
+          {
+            "category": "Part Time",
+            "job_title": "Elementary School Teacher",
+            "person_name": "Michael Brown",
+            "posting_date": "2023-12-05",
+            "deadline": "2023-12-30",
+            "salary_range": "$40,000 - $60,000",
+            "apply_number": 20
+          },
+          {
+            "category": "Part Time",
+            "job_title": "University Professor",
+            "person_name": "Emily Adams",
+            "posting_date": "2023-12-10",
+            "deadline": "2024-01-05",
+            "salary_range": "$80,000 - $100,000",
+            "apply_number": 12
+          }
+    ]
+  
