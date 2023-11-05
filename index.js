@@ -30,16 +30,54 @@ async function run() {
 
    
     app.get("/jobs", async(req, res) => {
-       let category = {};
+       let query = {};
        if(req?.query?.category){
-        category = {category: req.query.category}
+        query = {category: req.query.category}
+       } else if(req.query.email){
+        query = {email: req.query.email}
        }
-        const query = await jobs.find(category).toArray();
-        res.send(query)
+        const result = await jobs.find(query).toArray();
+        res.send(result)
+    })
+
+    app.get("/jobs/:id", async(req, res)=> {
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        const result = await jobs.findOne(query)
+        res.send(result)
     })
 
     app.get("/category", async(req, res) => {
         const result = await category.find().toArray()
+        res.send(result)
+    })
+
+    app.post("/jobs", async(req, res) => {
+        const data = req.body;
+        console.log(data);
+        const result = await jobs.insertOne(data)
+        res.send(result)
+    })
+
+    app.put("/jobs/:id", async(req, res) => {
+        const data = req.body;
+        const id = req.params.id;
+        const filter = {_id: new ObjectId(id)};
+        const options = {upsert: true};
+        const updateDoc = {
+            $set: {
+                name: data.name,
+                category: data.category,
+                deadline: data.deadline,
+                description: data.description,
+                jobNumber: data.jobNumber,
+                job_title: data.job_title,
+                photo: data.photo,
+                postingDate: data.postingDate,
+                salary: data.salary,
+            }
+        }
+        const result = await jobs.updateOne(filter, updateDoc, options);
         res.send(result)
     })
 
