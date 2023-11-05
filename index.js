@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
@@ -26,11 +26,23 @@ async function run() {
   try {
     await client.connect();
     const jobs = client.db("jobHeaven").collection("jobs");
+    const category = client.db("jobHeaven").collection("category");
+
    
     app.get("/jobs", async(req, res) => {
-        const query = await jobs.find().toArray();
+       let category = {};
+       if(req?.query?.category){
+        category = {category: req.query.category}
+       }
+        const query = await jobs.find(category).toArray();
         res.send(query)
     })
+
+    app.get("/category", async(req, res) => {
+        const result = await category.find().toArray()
+        res.send(result)
+    })
+
 
 
     await client.db("admin").command({ ping: 1 });
