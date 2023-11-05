@@ -27,6 +27,7 @@ async function run() {
     await client.connect();
     const jobs = client.db("jobHeaven").collection("jobs");
     const category = client.db("jobHeaven").collection("category");
+    const applyJob = client.db("jobHeaven").collection("applyJob");
 
    
     app.get("/jobs", async(req, res) => {
@@ -54,9 +55,14 @@ async function run() {
 
     app.post("/jobs", async(req, res) => {
         const data = req.body;
-        console.log(data);
         const result = await jobs.insertOne(data)
         res.send(result)
+    })
+
+    app.post("/applyJob", async(req, res) => {
+        const query = req.body;
+        const result = await applyJob.insertOne(query);
+        res.send(result);
     })
 
     app.put("/jobs/:id", async(req, res) => {
@@ -78,6 +84,13 @@ async function run() {
             }
         }
         const result = await jobs.updateOne(filter, updateDoc, options);
+        res.send(result)
+    })
+
+    app.delete("/jobs/:id", async(req, res) => {
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)};
+        const result = await jobs.deleteOne(query);
         res.send(result)
     })
 
