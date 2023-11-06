@@ -119,6 +119,14 @@ async function run() {
         res.send(result);
     })
 
+    app.put("/jobs/:job_title", async(req, res) => {
+        const query = req.params.job_title
+        console.log(query);
+        const filter = {job_title: query}
+        const result = await jobs.updateOne(filter, {$inc: {"jobNumber" : 1}})
+        res.send(result)
+    })
+
     app.put("/jobs/:id", async(req, res) => {
         const data = req.body;
         const id = req.params.id;
@@ -130,7 +138,6 @@ async function run() {
                 category: data.category,
                 deadline: data.deadline,
                 description: data.description,
-                jobNumber: data.jobNumber,
                 job_title: data.job_title,
                 photo: data.photo,
                 postingDate: data.postingDate,
