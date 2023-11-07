@@ -48,14 +48,16 @@ const verifyToken = (req, res, next) => {
 async function run() {
   try {
     await client.connect();
+    
     const jobs = client.db("jobHeaven").collection("jobs");
     const category = client.db("jobHeaven").collection("category");
     const applyJob = client.db("jobHeaven").collection("applyJob");
+    const customer = client.db("jobHeaven").collection("customer");
 
 
     app.post("/jwt", async(req, res) => {
         const user = req.body;
-        const token = jwt.sign(user, process.env.SECRET_TOKEN, {expiresIn: "1hr"})
+        const token = jwt.sign(user, process.env.SECRET_TOKEN, {expiresIn: "1h"})
         res.cookie('token', token, {
             httpOnly: true,
             secure: true,
@@ -80,6 +82,20 @@ async function run() {
         const result = await jobs.find(query).toArray();
         res.send(result)
     })
+
+    app.get("/customer", async(req, res) => {
+        const result = await customer.find().toArray();
+        res.send(result);
+    })
+
+    // app.get("/customer", async(req, res)=> {
+    //     let query = {};
+    //     if(req.query?.review){
+    //         query = {short_review: req.query.review}
+    //     }
+    //     const result = await customer.find(query).toArray();
+    //     res.send(result)
+    // })
     
    
     app.get("/jobs/:id", async(req, res)=> { 
@@ -121,7 +137,6 @@ async function run() {
 
     app.put("/jobs/:job_title", async(req, res) => {
         const query = req.params.job_title
-        console.log(query);
         const filter = {job_title: query}
         const result = await jobs.updateOne(filter, {$inc: {"jobNumber" : 1}})
         res.send(result)
